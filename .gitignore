@@ -1,0 +1,4 @@
+node_modules
+.DS_Store
+talks.json
+speakers.json
