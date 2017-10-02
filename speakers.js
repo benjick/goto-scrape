@@ -3,11 +3,12 @@ const fetch = require('node-fetch');
 const fs = require('mz/fs');
 const ora = require('ora');
 const sleep = require('sleep-promise');
+const uuid = require('uuid/v4');
 
 const baseUrl = 'https://gotocph.com/';
 
 const Cheerio = async url => {
-  await sleep(parseInt(Math.random() * 1000 * 2, 10));
+  await sleep(parseInt(Math.random() * 100 * 2, 10));
   const result = await fetch(baseUrl + url);
   const html = await result.text();
   return cheerio.load(html);
@@ -44,6 +45,7 @@ const init = async () => {
         .get()
         .join('\n\n');
       speaker.description = description;
+      speaker.id = uuid();
       delete speaker.url;
       spinner.succeed(speaker.name);
     }
